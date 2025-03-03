@@ -31,6 +31,7 @@
             box-shadow: 0px 0px 15px gray;
             max-width: 90%;
             animation: fadeIn 2s ease-in-out;
+            position: relative;
         }
 
         @keyframes fadeIn {
@@ -49,11 +50,12 @@
             to { text-shadow: 0 0 15px rgba(231, 76, 60, 1); }
         }
 
-        p {
+        .message {
             font-size: 18px;
             color: #333;
-            margin: 10px 20px;
-            animation: fadeInText 3s ease-in-out;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInText 1.5s forwards;
         }
 
         @keyframes fadeInText {
@@ -81,7 +83,6 @@
         .heart {
             position: absolute;
             font-size: 24px;
-            color: red;
             animation: floatUp 3s linear infinite;
         }
 
@@ -92,25 +93,32 @@
     </style>
 </head>
 <body>
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+        Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+
     <div class="container">
-        <h1>Chị Ơi, Em Xin Lỗi!</h1>
-        <p id="apologyText">
-            Chị à, em biết là em đã làm chị buồn... <br>
-            Em không cố ý đâu, nhưng em vẫn là đứa hậu đậu lại làm chị giận... <br>
-            Chị biết không? Em thực sự sợ cảm giác này lắm, <br>
-cảm giác khiến chị giận và khiến chị ghét... <br>
-            Tha lỗi và đừng ghét em nữa nhé, em không dám tái phạm nữa đâu. <br>
-            Chị có thể tha thứ cho thằng em ngốc nghếch này không? ❤️
-        </p>
-        <button onclick="changeText()">Đồng ý</button>
+<h1>Chị Ơi, Em Xin Lỗi!</h1>
+        <p class="message" id="line1">Chị à, em biết là em đã làm chị giận...</p>
+        <p class="message" id="line2">Em không cố ý đâu, nhưng em vẫn là đứa hậu đậu lại làm chị giận...</p>
+        <p class="message" id="line3">Chị biết không? Em thực sự sợ cảm giác này lắm...</p>
+        <p class="message" id="line4">Cảm giác khiến chị giận và khiến chị ghét...</p>
+        <p class="message" id="line5">Tha lỗi và đừng ghét em nữa nhé, em không dám tái phạm nữa đâu...</p>
+        <p class="message" id="line6">Chị có thể tha thứ cho thằng em ngốc nghếch này không? ❤️</p>
+
+        <button onclick="showNextLine()">Đồng ý</button>
     </div>
 
     <script>
-        function changeText() {
-            document.getElementById("apologyText").innerHTML = 
-                "Cảm ơn chị! <br> " +
-                "Chị là điều quý giá nhất với em. <br> " +
-                "Em yêu chị rất nhiều! ❤️";
+        let currentLine = 1;
+        function showNextLine() {
+            if (currentLine <= 6) {
+                document.getElementById("line" + currentLine).style.animation = "fadeInText 1.5s forwards";
+                currentLine++;
+            } else {
+                document.querySelector("button").innerText = "Cảm ơn chị! Em yêu chị nhiều lắm! ❤️";
+            }
         }
 
         function createHeart() {
@@ -119,11 +127,17 @@ cảm giác khiến chị giận và khiến chị ghét... <br>
             heart.innerHTML = "❤️";
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.animationDuration = Math.random() * 3 + 2 + "s"; 
+            heart.style.color = getRandomColor();
             document.body.appendChild(heart);
 
             setTimeout(() => {
                 heart.remove();
             }, 3000);
+        }
+
+        function getRandomColor() {
+            const colors = ["red", "pink", "#ff6b81", "#ff4757"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
 
         setInterval(createHeart, 500);
