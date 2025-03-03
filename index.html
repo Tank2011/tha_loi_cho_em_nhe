@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chị Ơi, Em Xin Lỗi!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4);
+            background-size: 300% 300%;
+            animation: bgAnimation 6s infinite alternate;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px gray;
+            max-width: 90%;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 26px;
+            animation: textGlow 1.5s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px rgba(231, 76, 60, 0.7); }
+            to { text-shadow: 0 0 15px rgba(231, 76, 60, 1); }
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 20px;
+            animation: fadeInText 3s ease-in-out;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background: linear-gradient(90deg, #e74c3c, #ff6f61);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #ff6f61, #e74c3c);
+            transform: scale(1.1);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: red;
+            animation: floatUp 3s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chị Ơi, Em Xin Lỗi!</h1>
+        <p id="apologyText">
+            Chị à, em biết là em đã làm chị buồn... <br>
+            Em không cố ý đâu, nhưng em vẫn là đứa hậu đậu lại làm chị giận... <br>
+            Chị biết không? Em thực sự sợ cảm giác này lắm, <br>
+cảm giác khiến chị giận và khiến chị ghét... <br>
+            Tha lỗi và đừng ghét em nữa nhé, em không dám tái phạm nữa đâu. <br>
+            Chị có thể tha thứ cho thằng em ngốc nghếch này không? ❤️
+        </p>
+        <button onclick="changeText()">Đồng ý</button>
+    </div>
+
+    <script>
+        function changeText() {
+            document.getElementById("apologyText").innerHTML = 
+                "Cảm ơn chị! <br> " +
+                "Chị là điều quý giá nhất với em. <br> " +
+                "Em yêu chị rất nhiều! ❤️";
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s"; 
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
