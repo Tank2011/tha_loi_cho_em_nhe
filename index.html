@@ -107,18 +107,15 @@
         <p class="message" id="line5">Tha lỗi và đừng ghét em nữa nhé, em không dám tái phạm nữa đâu...</p>
         <p class="message" id="line6">Chị có thể tha thứ cho thằng em ngốc nghếch này không? ❤️</p>
 
-        <button onclick="showNextLine()">Đồng ý</button>
+        <button onclick="showAllMessages()">Đồng ý</button>
     </div>
 
     <script>
-        let currentLine = 1;
-        function showNextLine() {
-            if (currentLine <= 6) {
-                document.getElementById("line" + currentLine).style.animation = "fadeInText 1.5s forwards";
-                currentLine++;
-            } else {
-                document.querySelector("button").innerText = "Cảm ơn chị! Em yêu chị nhiều lắm! ❤️";
+        function showAllMessages() {
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById("line" + i).style.animation = "fadeInText 1.5s forwards";
             }
+            document.querySelector("button").innerText = "Cảm ơn chị! Em yêu chị nhiều lắm! ❤️";
         }
 
         function createHeart() {
